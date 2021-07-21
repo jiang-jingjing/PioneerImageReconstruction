@@ -4,11 +4,10 @@
 %> based on monte carlo simulation
 %>
 %>@param volIn tissue volume
-%>@param cfg config struct including parameters for the forward models
-%>           
+%>@param paras parameters           
+%>
 %>
 %> @retval jac jacobian
-%> @retval out2 return value for the second output variable
  
-function [jac, varargout] = jacobianTimeMC(volIn, cfg, varargin)
+function [jac, varargout] = jacobianTimeMC(volIn, paras, varargin)
 end
