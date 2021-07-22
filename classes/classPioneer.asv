@@ -8,43 +8,21 @@
 classdef TissueVolume
     properties 
         Name = [];
-    end
-    properties
         unit = "mm"; 
-    end
-    properties
         Type = 'vx';% voxelized or mesh
-    end 
- 
+    end    
     methods 
         function vol = loadVolume(path, modelFW)
             if strcmp(modelFW, 'MC')
                 fid = fopen(path, 'rb');
-                vol.img = fread(fid, 'uint8');
+                v.img = fread(fid, 'uint8');
                 fileExt = strfind(path, '.vox'); 
-                if fileExt
-                    filename_img_dims = [filename(1:i-1), '_dims.txt'];
-                    dims = load(filename_img_dims, '-ascii');
-
-                    vol.img = uint8(reshape(vol.img, dims));
-                    fclose(fid);
-
-                    % Get tissue types
-                    filename_img_tiss = [filename(1:i-1), '_tiss_type.txt'];
-                    if exist(filename_img_tiss,'file')
-                        vol.tiss_prop = get_tiss_prop(filename_img_tiss);
-                    end
-                end
-                if ~ fileExt
-                    error(['file does not exist for ' modelFW])
-
-                end
-
+                
             elseif strcmp(modelFW, 'FEM')
                fileExt = strfind(filename, '.mat'); 
                if fileExt 
                    %load 
-                   v = load(filename, 'mesh');
+                   v = load(filename, 'mesh')
                    vol = v.mesh;
                end
                fileExt = strfind(filename, '.mesh'); 
@@ -52,11 +30,11 @@ classdef TissueVolume
                    % load mesh Nirfast
                end
                         
-                if ~fileExt
-                   error(['file does not exist for ' modelFW])
-
+                   if ~fileExt
+                       error(['file type should be mesh or mat for ' ...
+                            modelFE])
+                   end
                 end
-               
             else 
                 error('supported fw models are MC / FEM')
             end
@@ -66,15 +44,15 @@ classdef TissueVolume
 end
 
 
-% classdef Nirfaster
-%     properties (constant)
-%         Path = '';
-%     end
-% end
-% 
-% 
-% classdef Mcxlab
-% end
+classdef Nirfaster
+    properties (constant)
+        Path = '';
+    end
+end
+
+
+classdef Mcxlab
+end
 
 
 
