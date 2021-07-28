@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>PioneerImageReconstruction: /media/jiang/WD10T/Data/Projects/PioneerImageReconstruction/Visualization Directory Reference</title>
+<title>PioneerImageReconstruction: /media/jiang/WD10T/Data/Projects/PioneerImageReconstruction/Visualization/plot_FD_allsrouces_2data.m Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,7 +60,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li class="current"><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
@@ -85,20 +85,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Visualization Directory Reference</div>  </div>
+<div class="title">plot_FD_allsrouces_2data.m</div>  </div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
-Files</h2></td></tr>
-<tr class="memitem:plot___f_d__allsrouces_8m"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plot___f_d__allsrouces_8m.html">plot_FD_allsrouces.m</a> <a href="plot___f_d__allsrouces_8m_source.html">[code]</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:plot___f_d__allsrouces__2data_8m"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plot___f_d__allsrouces__2data_8m.html">plot_FD_allsrouces_2data.m</a> <a href="plot___f_d__allsrouces__2data_8m_source.html">[code]</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:plot_vol_m_c_8m"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="plot_vol_m_c_8m.html">plotVolMC.m</a> <a href="plot_vol_m_c_8m_source.html">[code]</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-</div><!-- contents -->
+<a href="plot___f_d__allsrouces__2data_8m.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">function</span> <a class="code" href="plot___f_d__allsrouces__2data_8m.html#a527259ee5c0b98916b9f959dd653336e">plot_FD_allsrouces_2data</a>(dat_1, dat_2, paras)</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;detnum = size(paras.det.coord,1);</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;srcnum = size(paras.src.coord,1);</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;figure;</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;for isrc = 1:srcnum</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    id_dets = [1: detnum]+ (isrc-1)*detnum;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    subplot(2,srcnum,isrc)</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    scatter3(paras.det.coord(:,1),paras.det.coord(:,2),...</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        log(dat_1.amplitude(id_dets)) - mean(log(dat_1.amplitude(id_dets))), &#39;bo&#39;)</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;   hold on</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;   scatter3(paras.det.coord(:,1),paras.det.coord(:,2),...</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        log(dat_2.amplitude(id_dets)) - mean(log(dat_2.amplitude(id_dets))), &#39;ro&#39;)</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;   </div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    title([&#39;src&#39; num2str(isrc) &#39; intensity&#39;])</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    subplot(2,srcnum,isrc + srcnum)</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    scatter3(paras.det.coord(:,1),paras.det.coord(:,2),...</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        dat_1.phase(id_dets) - mean(dat_1.phase(id_dets)),&#39;o&#39;)</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    hold on</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    scatter3(paras.det.coord(:,1),paras.det.coord(:,2),...</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        dat_2.phase(id_dets) - mean(dat_2.phase(id_dets)),&#39;o&#39;)</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    title(&#39;phase&#39;)</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;end</div><div class="ttc" id="plot___f_d__allsrouces__2data_8m_html_a527259ee5c0b98916b9f959dd653336e"><div class="ttname"><a href="plot___f_d__allsrouces__2data_8m.html#a527259ee5c0b98916b9f959dd653336e">plot_FD_allsrouces_2data</a></div><div class="ttdeci">function plot_FD_allsrouces_2data(in dat_1, in dat_2, in paras)</div><div class="ttdoc">Brief description of the function. </div></div>
+</div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated on Wed Jul 28 2021 18:24:43 for PioneerImageReconstruction by &#160;<a href="http://www.doxygen.org/index.html">

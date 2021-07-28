@@ -71,7 +71,7 @@ flnm_h_r={['/timing_response_' Prefix '_' ...
     wav '_'], '.mat'};
 nirot.calibration.dataPath = [fldr_r flnm_h_r];
 nirot.src.num = [1:11];
-
+nirot.repetitionID = 0; % no repetitions
 [pos2D nirot] = getSourceDetector(nirot.calibration.dataPath,...
     nirot);
 
@@ -80,14 +80,24 @@ nirot.src.num = [1:11];
 len_bin = 150
 bin0 = 13;
 bin_select = bin0:bin0+len_bin-1; 
+isSavePosition = 1;
 
+% specify time
+cfg.tstart=0;
+cfg.tstep=0.0488e-9;
+cfg.tend=cfg.tstep*len_bin;%5e-09;
+
+nPhoton_thresh = 1e2;
 
 [pos2D dataRef nirot] = prepareMeasData(...
     nirot.calibration.dataPath,...
     nirot,...
-    cfg);
+    bin_select,...
+    cfg, ...
+    isSavePosition,...
+    nPhoton_thresh);
 nirot.calibration.data = dataRef;
-
+ 
 %% STAGE 2: Forward simulation
 %% Step 2a: create tissue volume / mesh\
 filename_vol = ['./example_2inc/'  nirot.Volume.Name '.mat']
@@ -120,24 +130,36 @@ fclose(fileID);
 nirot = addSrcDetMC_Flat(pos2D, nirot);
 % plot volume and src/det
 h_vol = plotVolMC(nirot.vol, nirot);
+
+
+% convert time domain data to Fourier domain
+frequencies = 100 * 1e6; % Hz
+tic
+dataRef = td2fd(dataRef, frequencies);
+toc
+% visualie 2D distribution of log amplitude and phase
+plot_FD_allsrouces(dataRef, nirot)
+ 
 %% Step 2d: calculation of forward results
 % MCX simulation
- vol_init = nirot.vol;
+vol_init = nirot.vol;
 cfg.nphoton=5e8;
 cfg.maxdetphoton = 1e8;
-% specify time
-cfg.tstart=0;
-cfg.tstep=0.0488e-9;
-cfg.tend=cfg.tstep*len_bin;%5e-09;
+
 % forward 
 tic
-[dataFwd, nirot, cfg, resultMC] = forwardTimeMC(vol_init, ...
+[dataBase, nirot, cfg, resultMC] = forwardTimeMC(vol_init, ...
     nirot, cfg);
 toc
 
 h_fwd = figure; 
-semilogy(dataFwd.tpsf')
+semilogy(dataBase.tpsf')
 
+% frequencies = 100 * 1e6; % Hz
+% tic
+% dataBase= td2fd(dataBase, frequencies);
+% toc
+% plot_FD_allsrouces_2data(dataRef, dataBase, nirot)
 
 %% generate tpsf for new absorption properties
 % nirot.prop=[         0         0    1.0000    1.0000 ;% background/air
@@ -158,9 +180,9 @@ tic
 dataFwd_2 = td2fd(dataFwd_2, frequencies);
 toc
 % visualie 2D distribution of log amplitude and phase
-plot_FD_allsrouces(dataFwd_2, nirot)
+% plot_FD_allsrouces(dataFwd_2, nirot)
  
-
+plot_FD_allsrouces_2data(dataRef, dataFwd_2, nirot)
 % %% plotting TPSF at a voxel  
 % figure
 % % detpos=[30 14 9]; % choose a point inside the domain
@@ -251,7 +273,13 @@ plot_FD_allsrouces(dataFwd_2, nirot)
 %% Step 3a: calibration of measured data
 
 %% Step 3b: image reconstruction
-reconstructionFD
+nirot_2 = nirot;
+nirot_2.prop = cfg_2.prop;
+% test jacobian
+[jac, varargout] = jacobianTimeMC(nirot_2.vol, nirot_2,...
+    resultMC, cfg_2 )
+
+% reconstructionFD
 
 
  
