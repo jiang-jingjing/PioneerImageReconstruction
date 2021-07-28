@@ -366,13 +366,13 @@ save([fldr_pos '/' fln_out],  'PosSrcFEM', 'PosDetFEM',...
     'PosDetCam');
 disp(['model positions are saved to ' [fldr_pos '/' fln_out]])
  
-pos.det.coordinates2D = PosDetFEM;
-pos.src.coordinates2D = PosSrcFEM;
+pos.det.coordinates = PosDetFEM;
+pos.src.coordinates = PosSrcFEM;
 pos.unitmm = unitmm;
 pos.modelCenter = modelCenter;
 pos.camera = PosDetCam;
 pos.det.pixel = pixel_size;
 fln_out = 'posSrcDet_Flat.mat';
-save(fln_out, 'pos')
+save([fldr_pos '/' fln_out], 'pos')
 
 end
