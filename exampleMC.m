@@ -6,6 +6,8 @@
 
 %% ADD PATHS (temporary)
 addpath(genpath('./'))
+path_mcxlab = '/media/jiang/WD10T/Data/SoftwarePackages/mcx2021/';
+addpath(genpath(path_mcxlab))
 % mc 
 % fld_my = '/media/jiang/WD10T/Data/Projects/NIROTreconstruction/RECONSTRUCTION_MATLAB';
 % addpath([fld_my '/src/']);
@@ -59,7 +61,9 @@ nirot.probe.type = 'Flat';
 nirot.det.pixel = 1.09;
 nirot.det.fovC = [15 15] % approximate center of FOV
 nirot.det.ratioR = 0.87; % ratio of FOV region
-nirot.det.modelCenter = [45 45];
+% nirot.det.modelCenter = [45 45];
+nirot.det.modelCenter = [30 30];
+
 nirot.wavelengths = [689 725 ];
 nirot.iwav = 2;
 % measured data for calibration
@@ -77,7 +81,7 @@ nirot.repetitionID = 0; % no repetitions
 
 %% Step 1e: prepare measured data and select detectors
 % specify time gates
-len_bin = 150
+len_bin =  50
 bin0 = 13;
 bin_select = bin0:bin0+len_bin-1; 
 isSavePosition = 1;
@@ -102,7 +106,7 @@ nirot.calibration.data = dataRef;
 %% Step 2a: create tissue volume / mesh\
 filename_vol = ['./example_2inc/'  nirot.Volume.Name '.mat']
 nirot.unitmm = 1;
-nirot.vol = createCylinderMC(90,50,nirot.unitmm , filename_vol);
+nirot.vol = createCylinderMC(60,30,nirot.unitmm , filename_vol);
 
 %load Colin27 brain atlas
 % load nirot.Volume.Path
@@ -143,7 +147,7 @@ plot_FD_allsrouces(dataRef, nirot)
 %% Step 2d: calculation of forward results
 % MCX simulation
 vol_init = nirot.vol;
-cfg.nphoton=5e8;
+cfg.nphoton=1e8;
 cfg.maxdetphoton = 1e8;
 
 % forward 
@@ -275,6 +279,10 @@ plot_FD_allsrouces_2data(dataRef, dataFwd_2, nirot)
 %% Step 3b: image reconstruction
 nirot_2 = nirot;
 nirot_2.prop = cfg_2.prop;
+cfg_2.replaydet=0;  % replay all det and sum all
+% cfg_2.replaydet=1;  % replay only the 2nd detector
+%cfg_2.replaydet=3;  % replay only the 3rd detector
+% cfg_2.replaydet=-1; % replay all det and save all
 % test jacobian
 [jac, varargout] = jacobianTimeMC(nirot_2.vol, nirot_2,...
     resultMC, cfg_2 )

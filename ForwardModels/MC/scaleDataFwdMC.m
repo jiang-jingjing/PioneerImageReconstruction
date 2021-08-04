@@ -12,6 +12,9 @@
 %>          .prop optical properties
 %> 
 %> @retval dataFwd forward result
+%>
+%> created by jingjing jiang jing.jing.jiang@outlook.com
+%>
 function dataFwd = scaleDataFwdMC(resultMC, paras, cfg)
 c0=299792458000 ; % [mm/s]
 n = cfg.prop(2:end,4);

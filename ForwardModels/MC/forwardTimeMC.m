@@ -13,6 +13,9 @@
 %> @retval dataFwd forward result
 %> @retval paras parameters updated
 %> @retval cfg MC config parameters  updated
+%>
+%> created by jingjing jiang jing.jing.jiang@outlook.com
+%>
 function [dataFwd, paras, cfg, varargout] = forwardTimeMC(volIn, paras,cfg )
  % shuffle
 rng('shuffle')
