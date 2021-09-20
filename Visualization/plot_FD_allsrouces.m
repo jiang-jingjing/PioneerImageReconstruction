@@ -7,6 +7,7 @@
 %>          .phase
 %>@param paras parameters  
 %> 
+%> author: jingjing jiang jing.jing.jiang@outlook.com
 function plot_FD_allsrouces(dataFwd, paras)
 detnum = size(paras.det.coord,1);
 srcnum = size(paras.src.coord,1);

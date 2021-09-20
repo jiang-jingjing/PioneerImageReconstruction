@@ -15,6 +15,7 @@
 %>          .prop optical properties
 %> 
 %> @retval dataFwd forward result updated
+%> author: jingjing jiang jing.jing.jiang@outlook.com
 function dataFwd = td2fd(dataFwd, freq)
 tstep = unique(diff(dataFwd.time));
 if length(tstep)>1

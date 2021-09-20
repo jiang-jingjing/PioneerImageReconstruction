@@ -57,6 +57,7 @@ for isrc = 1:srcnum
         resultMC(isrc).detp = detp;
         resultMC(isrc).vol = vol;
         resultMC(isrc).seeds = seeds;
+        clear flux detp vol seeds
     end
     % calculate tpsf
     times_seg = detp.ppath;

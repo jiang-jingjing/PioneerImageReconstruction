@@ -10,7 +10,7 @@
 %> @retval pos  positions of detectors updated
 %> @retval data measured data
 %> @retval paras parameters updated
-
+%> author: jingjing jiang jing.jing.jiang@outlook.com
 function [pos data paras] = prepareMeasData(pathData, paras, bins,...
     cfg, isSavePosition, varargin)
 

@@ -2,7 +2,7 @@
 %>
 %> An example of image reconstruction for time domain modality 
 %> based on MC
-%>
+%> author: jingjing jiang jing.jing.jiang@outlook.com
 
 %% ADD PATHS (temporary)
 addpath(genpath('./'))
@@ -103,7 +103,7 @@ nPhoton_thresh = 1e2;
 nirot.calibration.data = dataRef;
  
 %% STAGE 2: Forward simulation
-%% Step 2a: create tissue volume / mesh\
+%% Step 2a: create tissue volume / mesh
 filename_vol = ['./example_2inc/'  nirot.Volume.Name '.mat']
 nirot.unitmm = 1;
 nirot.vol = createCylinderMC(60,30,nirot.unitmm , filename_vol);

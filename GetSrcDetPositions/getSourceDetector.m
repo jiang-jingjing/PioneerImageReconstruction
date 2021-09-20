@@ -8,7 +8,7 @@
 %>
 %> @retval pos positions of detectors
 %> @retval paras parameters updated
-
+%> author: jingjing jiang jing.jing.jiang@outlook.com
 function [pos paras] = getSourceDetector(pathData, paras)
 fldr = pathData{1};
 flnm = {pathData{2}, pathData{3}};

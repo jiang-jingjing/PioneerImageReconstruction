@@ -1,6 +1,6 @@
 %> demo MC simulation using mcxlab
 %>
-%> created by jingjing jiang jing.jing.jiang@outlook.com
+%> author: jingjing jiang jing.jing.jiang@outlook.com
 %>
 %% STAGE 1 Preparation 
 %% Step 1a: define imaging modality 

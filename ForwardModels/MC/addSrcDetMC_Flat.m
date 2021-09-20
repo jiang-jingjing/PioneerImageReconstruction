@@ -9,6 +9,7 @@
 %>
 %> @retval paras update 3D coordinates of sources and detectors 
 %>  in  parameters
+%> author: jingjing jiang jing.jing.jiang@outlook.com
 function paras = addSrcDetMC_Flat(pos2D, paras)
     vol = paras.vol;
     [x y z] = size(vol);
