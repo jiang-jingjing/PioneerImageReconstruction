@@ -56,8 +56,8 @@ nirot.Volume.Path = [];
 % get the positions from the Martin tapping experiment
 % (homogeneous tissue)
 nirot.probe.type = 'Flat';
-nirot.det.pixel = 1.09;
-nirot.det.fovC = [15 15] % approximate center of FOV
+nirot.det.pixel = 1.09;%[mm]
+nirot.det.fovC = [15 15] %[pixel] approximate center of FOV
 nirot.det.ratioR = 0.87; % ratio of FOV region
 % nirot.det.modelCenter = [45 45];
 nirot.det.modelCenter = [30 30];
@@ -79,7 +79,7 @@ nirot.repetitionID = 0; % no repetitions
 
 %% Step 1e: prepare measured data and select detectors
 % specify time gates
-len_bin =  50
+len_bin =  150
 bin0 = 13;
 bin_select = bin0:bin0+len_bin-1; 
 isSavePosition = 1;
@@ -99,6 +99,7 @@ nPhoton_thresh = 1e2;
     isSavePosition,...
     nPhoton_thresh);
 nirot.calibration.data = dataRef;
+figure, plot(dataRef.time, dataRef.tpsf)
 %% STAGE 2: Forward simulation
 %% Step 2a: create tissue volume / mesh
 filename_vol = ['./example_2inc/'  nirot.Volume.Name '.mat']
