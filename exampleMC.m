@@ -187,6 +187,11 @@ toc
 % plot_FD_allsrouces(dataFwd_2, nirot)
  
 plot_FD_allsrouces_2data(dataRef, dataFwd_2, nirot)
+
+%% convert time domain data to moments
+n_moments = 3;
+dataFwd = td2moments(dataFwd_2, n_moments);
+figure, semilogy(dataFwd.moments )
 % %% plotting TPSF at a voxel  
 % figure
 % % detpos=[30 14 9]; % choose a point inside the domain
