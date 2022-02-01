@@ -1,10 +1,10 @@
 %>@brief Brief description of the function
 %>
-%> get positions of sources and detectors from measruement
-%>
-%>@param volIn tissue volume
-%>@param paras parameters           
-%>@param cfg  bins array: selected time gates
+%> select time window and detectors
+%>@param pathData path for reference measurements
+%>@param paras parameters   
+%>@param  bins array: selected time gates
+%>@param cfg  config variable
 %>@param isSavePosition save the selected positions  
 %>@
 %> @retval pos  positions of detectors updated

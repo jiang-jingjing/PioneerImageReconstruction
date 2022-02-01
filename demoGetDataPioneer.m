@@ -62,7 +62,7 @@ nirot.det.ratioR = 0.87; % ratio of FOV region
 % nirot.det.modelCenter = [45 45];
 nirot.det.modelCenter = [30 30];
 
-nirot.wavelengths = [689 725 ];
+nirot.wavelengths = [689 725];
 nirot.iwav = 2;
 % measured data for calibration
 i_group = 1;

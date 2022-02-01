@@ -113,10 +113,7 @@ nirot.vol = createCylinderMC(60,30,nirot.unitmm , filename_vol);
 % nirot.vol = colin27
 
 %% Step 2b: add optical properties
-filename_vol_tiss = ['./example_2inc/'  nirot.Volume.Name ...
-    '_opticalProperties.txt']
 g = 0.35;
-% g=0.01
 mus  =  mus_r_bulk ./ (1-g);
 n = 1.37;
 % nirot.prop=[         0         0    1.0000    1.0000 ;% background/air
@@ -125,6 +122,8 @@ n = 1.37;
 nirot.prop=[         0         0    1.0000    1.0000 ;% background/air
     1e-6    mus(nirot.iwav)   g    n % liquid
     ];
+filename_vol_tiss = ['./example_2inc/'  nirot.Volume.Name ...
+    '_opticalProperties.txt']
 fileID = fopen(filename_vol_tiss, 'w');
 fprintf(fileID,'%1.4f %1.4f %1.2f %1.2f\n',nirot.prop');
 fclose(fileID);
@@ -148,7 +147,7 @@ plot_FD_allsrouces(dataRef, nirot)
 % MCX simulation
 vol_init = nirot.vol;
 cfg.nphoton=1e8;
-cfg.maxdetphoton = 1e8;
+cfg.maxdetphoton = 1e6;
 
 % forward 
 tic
