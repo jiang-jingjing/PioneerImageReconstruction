@@ -7,16 +7,32 @@
 %>          .tpsf
 
 %>@param freq  frequency (Hz)  
-%>@param paras parameters  
-%>@param cfg  struct config parameter for time gates 
-%>          .tstart
-%>          .tend
-%>          .tstep 
-%>          .prop optical properties
+%>@param varargin: calibration
+%>              @param dataMEAS_ref
+%>              @param dataSIM_ref
 %> 
 %> @retval dataFwd forward result updated
 %> author: jingjing jiang jing.jing.jiang@outlook.com
-function dataFwd = td2fd(dataFwd, freq)
+function dataFwd = td2fd(dataFwd, freq, varargin)
+isExistRef = 0;
+if ~isempty(varargin)
+   if length(varargin) >= 1
+       if isstruct(varargin{1}) 
+            dataMEAS_ref = varargin{1};
+            isExistRef = 1;
+       else
+            error('Bad 3th argument value. struct expected for dataMEAS_ref.')
+       end
+   end
+    if length(varargin) >= 2
+        if isstruct(varargin{2}) 
+            dataSIM_ref = varargin{2};
+        else
+            error('Bad 4th argument value. struct expected for dataSIM_ref.')
+        end
+    end 
+end
+
 tstep = unique(diff(dataFwd.time));
 if length(tstep)>1
     if std(tstep)>1e-12
@@ -53,7 +69,28 @@ for iff = 1:numfreq
     end
 end
 
-dataFwd.amplitude = data_fft_all.amplitude';
-dataFwd.phase = data_fft_all.phase';
-dataFwd.frequency = freq;
+%% calibration
+if isExistRef 
+    % calibration
+    scaler.amplitude = dataMEAS_ref.amplitude./...
+          dataSIM_ref.amplitude;  
+    data_fft_calibrated.amplitude = data_fft_all.amplitude'./ ...
+        scaler.amplitude;
+    scaler.phase = dataMEAS_ref.phase -...
+        dataSIM_ref.phase;
+    data_fft_calibrated.phase = data_fft_all.phase' - ...
+        scaler.phase;
+    dataFwd = data_fft_calibrated;
+    dataFwd.link = dataSIM_ref.link;
+else
+    % no calibration
+    dataFwd.amplitude = data_fft_all.amplitude';
+    dataFwd.phase = data_fft_all.phase';
+end
+
+
+dataFwd.paa =[dataFwd.amplitude ...
+    dataFwd.phase];
+dataFwd.frequency = freq; 
+
 end

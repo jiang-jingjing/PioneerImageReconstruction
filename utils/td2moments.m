@@ -7,16 +7,31 @@
 %>          .tpsf
 
 %>@param n_moments  maximum order + 1
-%>@param paras parameters  
-%>@param cfg  struct config parameter for time gates 
-%>          .tstart
-%>          .tend
-%>          .tstep 
-%>          .prop optical properties
+%>@param varargin: calibration
+%>              @param dataMEAS_ref
+%>              @param dataSIM_ref
 %> 
 %> @retval dataFwd forward result updated
 %> author: jingjing jiang jing.jing.jiang@outlook.com
-function dataFwd = td2moments(dataFwd, n_moments)
+function dataFwd = td2moments(dataFwd, n_moments, varargin)
+isExistRef = 0;
+if ~isempty(varargin)
+   if length(varargin) >= 1
+       if isstruct(varargin{1}) 
+            dataMEAS_ref = varargin{1};
+            isExistRef = 1;
+       else
+            error('Bad 3th argument value. struct expected for dataMEAS_ref.')
+       end
+   end
+    if length(varargin) >= 2
+        if isstruct(varargin{2}) 
+            dataSIM_ref = varargin{2};
+        else
+            error('Bad 4th argument value. struct expected for dataSIM_ref.')
+        end
+    end 
+end
 tstep = unique(diff(dataFwd.time));
 if length(tstep)>1
     if std(tstep)>1e-12
@@ -43,7 +58,26 @@ for ind = 1:count
     moments(ind, :) = mm;
 end 
 
+%% calibration
+if isExistRef
+    im = 1;
+    scaler  = dataMEAS_ref.moments(:,im) ./ ...
+    dataSIM_ref.moments(:,im);
+    data_cal.moments(:,im) = moments(:,im)./ ...
+        scaler; 
+    for im = 2:size(moments,2)
+        scaler  = dataMEAS_ref.moments(:,im) - ...
+            dataSIM_ref.moments(:,im);
+        data_cal.moments(:,im) = moments(:,im) - ...
+            scaler;
+    end
+    dataFwd.moments = data_cal.moments;
+    dataFwd.link = dataSIM_ref.link;
+else
+    
 dataFwd.moments = moments;
+
+end
 dataFwd.n_moments = n_moments;
 end
 

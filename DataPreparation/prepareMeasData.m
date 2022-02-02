@@ -70,14 +70,19 @@ end
 
 id_selected = idValid(1).detid;
 srcnum = length(srcID);
-for ii = srcID(2:end)
+if size(srcID,1)==1
+    src_tmp = srcID;
+elseif size(srcID,1)>1
+    src_tmp = srcID';
+end
+for ii = src_tmp(2:end)
     id_selected = intersect(id_selected,idValid(ii).detid);
 end
 
 detnum = length(id_selected);
 data.tpsf = zeros(detnum*srcnum, len_bin);
  
-for isrc =srcID
+for isrc =src_tmp
     data.tpsf(1+(isrc-1)*detnum : isrc*detnum,:)= ...
      hist_all(isrc).data(id_selected,:);
 %         idValid(id_src).detid= id_selected;
@@ -104,7 +109,5 @@ end
 
 
 data.time = cfg.tstart+cfg.tstep/2:cfg.tstep:cfg.tend;
-
- 
 
 end

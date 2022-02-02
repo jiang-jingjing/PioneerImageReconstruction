@@ -24,9 +24,9 @@ for isrc = 1:srcnum
     title(['src' num2str(isrc) ' intensity'])
     subplot(2,srcnum,isrc + srcnum)
     scatter3(paras.det.coord(:,1),paras.det.coord(:,2),...
-        dat_1.phase(id_dets) - mean(dat_1.phase(id_dets)),'o')
+        dat_1.phase(id_dets) - mean(dat_1.phase(id_dets)),'bo')
     hold on
     scatter3(paras.det.coord(:,1),paras.det.coord(:,2),...
-        dat_2.phase(id_dets) - mean(dat_2.phase(id_dets)),'o')
+        dat_2.phase(id_dets) - mean(dat_2.phase(id_dets)),'ro')
     title('phase')
 end
