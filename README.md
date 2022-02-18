@@ -16,6 +16,7 @@ Methods for simulating light propogation or diffusion inside turbid media.
 #### Numerical models include:
  
   - Monte Carlo Methods
+  see the [example](https://github.com/jiang-jingjing/PioneerImageReconstruction/blob/master/exampleMC.m)
   - Finite Element Methods
-  
+  see the [example](https://github.com/jiang-jingjing/PioneerImageReconstruction/blob/master/exampleFEM.m)
   
