@@ -14,14 +14,14 @@ format compact;
 %addpath('PioneerMATLAB/')
 tic
 
-Path_base = ['/media/mad/Doc/PycharmProjects/Fang/Exec/Retrieval/Data/ER'];
+Path_base = ['/media/jiang/WD10T/Data/Projects/NIROTreconstruction/PioneerMeasurement2021/Data/'];
 
-proj_name = "20211026_LQ7ho";
+proj_name = "Spih10_z3_20211001";
 
 name_fld_corrected = 'timing_data_corrected';
 Prefix = 'laser';
 
-waveList = [802];   % Example [689 725 802];
+waveList = [725];   % Example [689 725 802];
 
 sources =  [1:11];
 
