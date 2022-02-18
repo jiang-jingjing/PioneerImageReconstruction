@@ -14,9 +14,9 @@ format compact;
 %addpath('PioneerMATLAB/')
 tic
 
-Path_base = ['/media/jiang/WD10T/Data/Projects/NIROTreconstruction/PioneerMeasurement2021/Data/'];
+Path_base = ['/media/jiang/WD10T/Data/Projects/PioneerDebug2022/Data/tubeComparison/'];
 
-proj_name = "Spih10_z3_20211001";
+proj_name = '20220218_PETG_painted_homo';
 
 name_fld_corrected = 'timing_data_corrected';
 Prefix = 'laser';
@@ -26,8 +26,8 @@ waveList = [725];   % Example [689 725 802];
 sources =  [1:11];
 
 path_prj = fullfile(Path_base, proj_name);
-hdf5_file = fullfile(path_prj, strcat(Prefix,'-', proj_name,'.hdf5'));
-
+% hdf5_file = fullfile(path_prj, strcat(Prefix,'-', proj_name,'.hdf5'));
+hdf5_file = [Path_base '/' proj_name '/laser-20220218_PETG__painted_homo.hdf5'];
 info = h5info(hdf5_file, '/Data');
 
 if exist(fullfile(path_prj, name_fld_corrected))==0

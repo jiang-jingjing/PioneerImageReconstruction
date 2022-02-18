@@ -30,7 +30,7 @@ info = h5info(file, '/Data');
 if exist([fldr '/timing_data_corrected'])==0
     mkdir([fldr '/timing_data_corrected'])
 end
-    
+ 
 % find all datasets to process
 ids = [];
 for index = 1:length(info.Datasets)
@@ -90,7 +90,7 @@ for i_id = 1:length(ids)
             end
             
         end
-        col_time = toc;
+%         col_time = toc;
     end
      foo = sprintf([fldr '/' 'timing_data_corrected/' file_pos '/timing_response_%s_%s_%s_%s.mat'], ...
         Prefix, wav, num2str(source_no), num2str(rep_no));
