@@ -16,7 +16,7 @@ tic
 
 Path_base = ['/media/jiang/WD10T/Data/Projects/PioneerDebug2022/Data/tubeComparison/'];
 
-proj_name = '20220218_PETG_painted_homo';
+proj_name = '20220228_alu_anodized_hetero';
 
 name_fld_corrected = 'timing_data_corrected';
 Prefix = 'laser';
@@ -26,8 +26,8 @@ waveList = [725];   % Example [689 725 802];
 sources =  [1:11];
 
 path_prj = fullfile(Path_base, proj_name);
-% hdf5_file = fullfile(path_prj, strcat(Prefix,'-', proj_name,'.hdf5'));
-hdf5_file = [Path_base '/' proj_name '/laser-20220218_PETG__painted_homo.hdf5'];
+hdf5_file = fullfile(path_prj, strcat(Prefix,'-', proj_name,'.hdf5'));
+% hdf5_file = [Path_base '/' proj_name '/laser-20220228_PETG_homo.hdf5'];
 info = h5info(hdf5_file, '/Data');
 
 if exist(fullfile(path_prj, name_fld_corrected))==0

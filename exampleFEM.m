@@ -26,9 +26,10 @@ group = group_list{i_group};
 fldr_homo = [FOLDER   '/TM_SPih10r_ref/']
 fldr_heter = [FOLDER   '/TM_SPih10_ref/']
 %% optical properties 
+% optical properties of the bulk
 muas_bulk = 0.0055 * ones(1,4); %690 725 802 840
 mus_r_bulk = [0.81  0.76 0.69 0.67] ;  % 
-
+% optical properties of the inclusions
 muas_inc = [0.0366 0.030 0.0187 0.124];
 mus_r_inc = [0.87 0.9 0.831 0.8];
 %% STAGE 1 Preparation 
