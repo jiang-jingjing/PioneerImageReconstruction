@@ -52,7 +52,7 @@ end
 %% STAGE 1 Preparation 
 %% - Step 1a: define imaging modality 
 nirot.ImagingModality = 'TD';
-nirot.ReconstructionDataType = 'FD'; % single frequency
+% nirot.ReconstructionDataType = 'FD'; % single frequency
 % nirot.ReconstructionDataType = 'TG'; % all time gates
 % nirot.ReconstructionDataType = 'Moments'; % temporal moments
 %% - Step 1b: define forward model
@@ -121,8 +121,8 @@ nirot.measurements.data = dataInc;
 %% STAGE 2: Forward simulation
 %% - Step 2a: create tissue volume / mesh with sources and detectors
 % mesh for Nirfast
-% 1:generate / 0:load mesh
-isGenerateMesh = 0 
+% generate / load mesh
+isGenerateMesh = 1; 
 if isGenerateMesh
     addpath(genpath(pathNirfast8))
     mesh = create_cylinder_D90(pos2D, 3, 1, 1); %D90 d50
@@ -133,25 +133,10 @@ if isGenerateMesh
 else % load mesh
     fn_mesh = 'exampleVolumeFEM/Cylinder_D90/Cylinder_1_mesh';
     nirot.Volume.Path = [fn_mesh  '.mat'];
-    fn_mesh=load(nirot.Volume.Path);
-    mesh=fn_mesh.mesh;
+    mesh=load(nirot.Volume.Path);
 end
 nirot.det = mesh.meas;
 nirot.src = mesh.source;
-% visualize mesh 3D
-h_mesh = figure()
-% plot boundary nodes
-plot3(mesh.nodes(logical(mesh.bndvtx),1),...
-    mesh.nodes(logical(mesh.bndvtx),2),...
-    mesh.nodes(logical(mesh.bndvtx),3),'c.');
-hold on
-% plot sources
-plot3(mesh.source.coord(:,1),mesh.source.coord(:,2),...
-    mesh.source.coord(:,3),'rx','LineWidth',2,'MarkerSize',8);
-% plot detectors
-plot3(mesh.meas.coord(:,1), mesh.meas.coord(:,2),mesh.meas.coord(:,3),...
-    'bo','LineWidth',2,'MarkerSize',8);
-
 %% - Step 2b: add optical properties to the mesh
 g = 0.35;
 mus  =  mus_r_bulk ./ (1-g);

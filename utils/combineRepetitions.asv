@@ -1,7 +1,6 @@
 %>@brief combineRepetitions.m
-%> sum up temporal data at selected repetitions
-%> for a longer exposure time
-%> created: 2022.03.04
+%> sum up temporal data at selected repetitions f
+%> 
 %> author: jingjing jiang jing.jing.jiang@outlook.com
 function combineRepetitions(fldr,waveList, group_list, ...
     rep_list, srcList,Prefix, isPM, scalerPM)
