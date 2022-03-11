@@ -1,0 +1,116 @@
+Forward Mesh   = ./mesh/Rectangle-stnd-mesh
+Frequency      = 100.000000 MHz
+Initial Regularization  = 1.000000e-01
+Filter         = 0
+Output Files   = _mua.sol
+               = _mus.sol
+Initial Guess mua = 8.000000e-03
+Initial Guess mus = 3.000000e-01
+---------------------------------
+Iteration Number          = 1
+Projection error          = 0.727457
+Amp Regularization        = 0.007159
+Phs Regularization        = 0.000084
+---------------------------------
+Iteration Number          = 2
+Projection error          = 0.018317
+Projection error change   = 97.482052 %
+Amp Regularization        = 0.007941
+Phs Regularization        = 0.000091
+---------------------------------
+Iteration Number          = 3
+Projection error          = 0.005968
+Projection error change   = 67.415805 %
+Amp Regularization        = 0.008159
+Phs Regularization        = 0.000095
+---------------------------------
+Iteration Number          = 4
+Projection error          = 0.005117
+Projection error change   = 14.266088 %
+Amp Regularization        = 0.008127
+Phs Regularization        = 0.000096
+---------------------------------
+Iteration Number          = 5
+Projection error          = 0.003174
+Projection error change   = 37.976163 %
+Amp Regularization        = 0.008082
+Phs Regularization        = 0.000096
+---------------------------------
+Iteration Number          = 6
+Projection error          = 0.002103
+Projection error change   = 33.725048 %
+Amp Regularization        = 0.008035
+Phs Regularization        = 0.000096
+---------------------------------
+Iteration Number          = 7
+Projection error          = 0.001552
+Projection error change   = 26.205075 %
+Amp Regularization        = 0.007994
+Phs Regularization        = 0.000096
+---------------------------------
+Iteration Number          = 8
+Projection error          = 0.001287
+Projection error change   = 17.075270 %
+Amp Regularization        = 0.007964
+Phs Regularization        = 0.000096
+---------------------------------
+Iteration Number          = 9
+Projection error          = 0.001165
+Projection error change   = 9.472278 %
+Amp Regularization        = 0.007949
+Phs Regularization        = 0.000096
+---------------------------------
+Iteration Number          = 10
+Projection error          = 0.001098
+Projection error change   = 5.753891 %
+Amp Regularization        = 0.007951
+Phs Regularization        = 0.000096
+---------------------------------
+Iteration Number          = 11
+Projection error          = 0.001050
+Projection error change   = 4.426462 %
+Amp Regularization        = 0.007955
+Phs Regularization        = 0.000096
+---------------------------------
+Iteration Number          = 12
+Projection error          = 0.001008
+Projection error change   = 3.922820 %
+Amp Regularization        = 0.007959
+Phs Regularization        = 0.000096
+---------------------------------
+Iteration Number          = 13
+Projection error          = 0.000972
+Projection error change   = 3.649203 %
+Amp Regularization        = 0.007960
+Phs Regularization        = 0.000096
+---------------------------------
+Iteration Number          = 14
+Projection error          = 0.000938
+Projection error change   = 3.417791 %
+Amp Regularization        = 0.007960
+Phs Regularization        = 0.000096
+---------------------------------
+Iteration Number          = 15
+Projection error          = 0.000909
+Projection error change   = 3.090584 %
+Amp Regularization        = 0.007960
+Phs Regularization        = 0.000096
+---------------------------------
+Iteration Number          = 16
+Projection error          = 0.000886
+Projection error change   = 2.621187 %
+Amp Regularization        = 0.007959
+Phs Regularization        = 0.000096
+---------------------------------
+Iteration Number          = 17
+Projection error          = 0.000867
+Projection error change   = 2.083017 %
+Amp Regularization        = 0.007958
+Phs Regularization        = 0.000096
+---------------------------------
+Iteration Number          = 18
+Projection error          = 0.000853
+Projection error change   = 1.586715 %
+---------------------------------
+STOPPING CRITERIA REACHED
+Computation TimeRegularization = 6.254066
