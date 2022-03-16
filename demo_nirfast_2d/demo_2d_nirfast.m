@@ -2,6 +2,7 @@
 % demo_nirfast_2d.m
 % demo for nirfast simulation
 % created on 2022.03.02 Jingjing Jiang
+% modified on 2022.03.16 Jingjing Jiang
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% add paths for required packages
 % define nirfast paths
@@ -164,4 +165,12 @@ hold on
 plot(cfg.timeGates, data_TR_anom.tpsf(itpsf,:))
 
 %% image reconstruction: Time domain
-% 
+t_cfg.range = cfg.tend;
+t_cfg.step = cfg.tstep;
+t_cfg.num_gates = cfg.num_gates;
+tic
+[meshRec_TD, pj_error_TG] = reconstruct_stnd_TD(mesh_homo,t_cfg, ...
+        data_TR_anom, 'mua',[], MESH_COARSE, MAX_ITERATIONS, REG_THIKONOV)
+     toc
+    plotimage(meshRec_TD, meshRec_TD.mua)
+
