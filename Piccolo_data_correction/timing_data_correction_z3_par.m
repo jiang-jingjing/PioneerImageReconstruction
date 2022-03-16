@@ -14,14 +14,14 @@ format compact;
 %addpath('PioneerMATLAB/')
 tic
 
-Path_base = ['/media/jiang/WD10T/Data/Projects/PioneerDebug2022/Data/tubeComparison/'];
+Path_base = ['/media/jiang/WD10T/Data/Projects/PioneerDebug2022/Data/'];
 
-proj_name = '20220228_alu_anodized_hetero';
+proj_name = 'ICGlipid_20220311';
 
 name_fld_corrected = 'timing_data_corrected';
 Prefix = 'laser';
 
-waveList = [725];   % Example [689 725 802];
+waveList = [ 780 830 ];   % Example [689 725 802];
 
 sources =  [1:11];
 
