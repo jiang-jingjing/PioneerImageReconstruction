@@ -94,6 +94,6 @@ end
 % make coordinates output
 cs_coord(:,:,1)=xq;
 cs_coord(:,:,2)=yq;
-% cs_coord(:,:,3)=zq;
+cs_coord(:,:,3)=zq;
 
 end
