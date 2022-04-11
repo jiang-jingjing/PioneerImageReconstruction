@@ -346,7 +346,7 @@ for ind_experiment = 1:experiments_no
                 fprintf(fid_log,'Projection error change         = %f %%\n',error_change);
             end
             % check for stopping criteria
-            if error_change >= -5%-2
+            if error_change >= -2
                 disp('---------------------------------');
                 disp('STOPPING CRITERIA REACHED       : error change >= -2%');
                 if ~isempty(log_filename)
@@ -362,9 +362,9 @@ for ind_experiment = 1:experiments_no
 
         % Set/update Thikonov regularization
         if ind_iter > 1
-%             reg_thikonov = reg_thikonov./10^0.25;
+            reg_thikonov = reg_thikonov./10^0.25;
 %             reg_thikonov = reg_thikonov./10^0.001 .* abs(error_change./100) ^0.25;% changed by jingjing
-            reg_thikonov = reg_thikonov./10.* abs(error_change./100) ^0.25;% changed by jingjing
+%             reg_thikonov = reg_thikonov./10.* abs(error_change./100) ^0.25;% changed by jingjing
 
             reg_thikonov 
 
