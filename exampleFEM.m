@@ -52,8 +52,8 @@ end
 %% STAGE 1 Preparation 
 %% - Step 1a: define imaging modality 
 nirot.ImagingModality = 'TD';
-nirot.ReconstructionDataType = 'FD'; % single frequency
-% nirot.ReconstructionDataType = 'TG'; % all time gates
+% nirot.ReconstructionDataType = 'FD'; % single frequency
+nirot.ReconstructionDataType = 'TG'; % all time gates
 % nirot.ReconstructionDataType = 'Moments'; % temporal moments
 %% - Step 1b: define forward model
 % add corresponding forward package
@@ -122,9 +122,9 @@ nirot.measurements.data = dataInc;
 %% - Step 2a: create tissue volume / mesh with sources and detectors
 % mesh for Nirfast
 % 1:generate / 0:load mesh
-isGenerateMesh = 0 
+isGenerateMesh = 1 
+addpath(genpath(pathNirfast8))
 if isGenerateMesh
-    addpath(genpath(pathNirfast8))
     mesh = create_cylinder_D90(pos2D, 3, 1, 1); %D90 d50
     fn_mesh = 'exampleVolumeFEM/Cylinder_D90/Cylinder_1_mesh';
     nirot.Volume.Path = [fn_mesh  '.mat'];
@@ -155,7 +155,7 @@ plot3(mesh.meas.coord(:,1), mesh.meas.coord(:,2),mesh.meas.coord(:,3),...
 %% - Step 2b: add optical properties to the mesh
 g = 0.35;
 mus  =  mus_r_bulk ./ (1-g);
-n = 1.37;
+n = 1.43;
 val_p.mua=muas_bulk(nirot.iwav);  
 val_p.mus=mus_r_bulk(nirot.iwav); 
 val_p.ri=n; % pdms
@@ -177,7 +177,6 @@ fprintf(fileID,'%1.4f %1.4f %1.2f %1.2f\n',nirot.prop');
 fclose(fileID);
 
 %% - Step 2c: add inclusions / or load segmentation 
-%model with a spherical inclusion
 mesh_heter = mesh_homo;
 xc = mean(mesh_homo.nodes(:,1));
 yc = mean(mesh_homo.nodes(:,2));
@@ -307,8 +306,66 @@ if strcmp(nirot.ReconstructionDataType, 'FD')
             meshRec_FD,  coords4plot); 
 elseif strcmp(nirot.ReconstructionDataType, 'TG')
 %% - Step 3b: datatype 2: time gate
+%% - - Step 3b-2: calibration of TG data
+    tic
+    dataEXP_tg_homo = nirot.calibration.data;
+    dataEXP_tg_heter= tdCalibration(nirot.measurements.data,...
+        cfg.timeGates,...
+        dataEXP_tg_homo,...
+        dataSIM_tg_homo, ...
+        0); 
+    toc 
+    
+%% - - -  simulation heterogeneous case
+    tic; 
+        [dataSIM_tg_heter] = femdata_stnd_TR(mesh_heter,...
+            cfg.tend,cfg.tstep,'field', 'BiCGStab_GPU');
+    toc; 
+    %% plot
+    itpsf = 100;
+    figure, semilogy(dataEXP_tg_heter.time,...
+        dataEXP_tg_heter.tpsf(itpsf,:))
+    hold on
+    semilogy(dataSIM_tg_homo.time,...
+        dataSIM_tg_homo.tpsf(itpsf,:))
+    semilogy(dataSIM_tg_heter.time,...
+        dataSIM_tg_heter.tpsf(itpsf,:))
+    legend('calibrated heter tg', 'simulated homo tg',...
+        'simulated heter tg')
+    title(['tpsf id = ', num2str(itpsf)])
 %% - - Step 3b-1: calibration of TG data
 %% - - Step 3b-2: simulation validation [TG]
+%% calculate temporal data
+addpath(genpath(pathNirfaster))
+% cfg.tstart = 0;
+% cfg.tstep = 0.0488*1e-9 /2 ;  
+% cfg.num_gates = 20 *2;
+% cfg.tend = cfg.tstep* cfg.num_gates ;
+cfg.timeGates = cfg.tstart+cfg.tstep:cfg.tstep:cfg.tend;
+[dataSIM_tg_heter] = femdata_stnd_TR(mesh_heter,...
+    cfg.tend,cfg.tstep,'field', 'BiCGStab_GPU');
+%%  plot tpsfs 
+ itpsf = 6
+h_psf=figure()
+plot(cfg.timeGates, dataSIM_tg_homo.tpsf(itpsf,:))
+hold on
+plot(cfg.timeGates, dataSIM_tg_heter.tpsf(itpsf,:))
+
+%% image reconstruction: Time domain
+t_cfg.range = cfg.tend;
+t_cfg.step = cfg.tstep;
+t_cfg.num_gates = cfg.num_gates;
+MESH_COARSE = [90 90 50]/10;
+MAX_ITERATIONS = 10;
+REG_THIKONOV =10
+tic
+[meshRec_TD_SIM, pj_error_TG] = reconstruct_stnd_TD(mesh_homo,t_cfg, ...
+        dataSIM_tg_heter, 'mua',[], MESH_COARSE, MAX_ITERATIONS, REG_THIKONOV)
+     toc
+ coords4plot = [xc yc  z0];
+plot_truthVSrecon(mesh_heter, ...
+            meshRec_TD_SIM,  coords4plot);    
+
 %% - - Step 3b-3: Image reconstruction [TG]
 elseif strcmp(nirot.ReconstructionDataType, 'Moments')
 %% - Step 3c: datatype 3: moments

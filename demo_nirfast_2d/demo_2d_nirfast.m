@@ -113,7 +113,7 @@ semilogy(data_Moments_anom.moments)
 tic
 REG_THIKONOV = 1;
 MESH_COARSE = [50 30]*0.5;
-MAX_ITERATIONS = 20;
+MAX_ITERATIONS = 10;
 [meshRec_moments, pj_error_moments] = reconstruct_stnd_moments(mesh_homo, max_order, ...
      data_Moments_anom, 'mua',[], MESH_COARSE, MAX_ITERATIONS, REG_THIKONOV);
 toc
