@@ -306,7 +306,7 @@ if strcmp(nirot.ReconstructionDataType, 'FD')
             meshRec_FD,  coords4plot); 
 elseif strcmp(nirot.ReconstructionDataType, 'TG')
 %% - Step 3b: datatype 2: time gate
-%% - - Step 3b-2: calibration of TG data
+%% - - Step 3b-1: calibration of TG data
     tic
     dataEXP_tg_homo = nirot.calibration.data;
     dataEXP_tg_heter= tdCalibration(nirot.measurements.data,...
@@ -314,8 +314,7 @@ elseif strcmp(nirot.ReconstructionDataType, 'TG')
         dataEXP_tg_homo,...
         dataSIM_tg_homo, ...
         0); 
-    toc 
-    
+    toc    
 %% - - -  simulation heterogeneous case
     tic; 
         [dataSIM_tg_heter] = femdata_stnd_TR(mesh_heter,...
@@ -333,7 +332,6 @@ elseif strcmp(nirot.ReconstructionDataType, 'TG')
     legend('calibrated heter tg', 'simulated homo tg',...
         'simulated heter tg')
     title(['tpsf id = ', num2str(itpsf)])
-%% - - Step 3b-1: calibration of TG data
 %% - - Step 3b-2: simulation validation [TG]
 %% calculate temporal data
 addpath(genpath(pathNirfaster))
