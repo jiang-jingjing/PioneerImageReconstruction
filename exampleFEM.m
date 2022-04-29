@@ -304,6 +304,13 @@ if strcmp(nirot.ReconstructionDataType, 'FD')
     coords4plot = [xc yc  z0];
     plot_truthVSrecon(mesh_heter, ...
             meshRec_FD,  coords4plot); 
+   
+%% evaluation metrics
+    [metric_eval mesh_seg mesh_seg_GT] = evaluate_reconstruction_mesh(...
+        mesh_heter, meshRec_FD);
+    metric_eval
+    plot_truthVSrecon(mesh_seg_GT, ...
+            mesh_seg,  coords4plot);
 elseif strcmp(nirot.ReconstructionDataType, 'TG')
 %% - Step 3b: datatype 2: time gate
 %% - - Step 3b-1: calibration of TG data
