@@ -88,7 +88,7 @@ for isrc = ListSrc
     % get CW data
      if iscell(timing_response) % old data type before 2021.04
 
-%         [nc nr] = size(timing_response);
+        [nc nr] = size(timing_response);
 %         [~,Y] = meshgrid(0.5:nc-0.5, 0.5:nr-0.5);
 %         kk = 0.25;
 %         [Xq,Yq] = meshgrid(0.5:kk:nc-0.5, 0.5:kk:nr-0.5);
