@@ -54,8 +54,12 @@ for  ii = 1:length(srcID)
     hist_meas_temp = zeros(detnum,len_bin);
     count = 1;
     for jj = 1:length(xFOV)
-        timing_tmp =  squeeze(timing_response(:, xFOV(jj), yFOV(jj)));
-        if ~isempty(timing_tmp) & sum(timing_tmp)> nPhoton_thresh
+         if iscell(timing_response)
+             timing_tmp =  timing_response{xFOV(jj), yFOV(jj)};
+         else
+            timing_tmp =  squeeze(timing_response(:, xFOV(jj), yFOV(jj)));
+         end
+         if ~isempty(timing_tmp) & sum(timing_tmp)> nPhoton_thresh
 
             timing_tmp = timing_tmp - median(timing_tmp);% add back 2021.06.18
             timing_tmp_sft = timing_tmp(bins); % 2021.06.18
