@@ -1,7 +1,8 @@
 function mesh = create_cylinder_D90(pos, facet_distance, ...
     facet_size, cell_size)
 gis_args.medfilter=1;
-fldr_mask = 'exampleVolumeFEM/Cylinder_D90';
+p = mfilename('fullpath');
+fldr_mask = [p(1:end-19) '/Cylinder_D90'];
 fn_mask = 'Cylinder_1';
 type_mask = '.bmp';
 [mask param] = GetImageStack([fldr_mask '/' fn_mask type_mask],...
