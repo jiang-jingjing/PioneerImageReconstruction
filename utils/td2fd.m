@@ -41,7 +41,7 @@ if length(tstep)>1
     tstep = mean(tstep);    
 end
 N = 2048;
-f = (0:N/2)' / N / tstep; % tstep = 12.5ns/256
+f = (0:N/2)' / N / tstep; % changed on 23-May-2022 tstep = 12.5ns/256
 numfreq = length(freq);
 
 count = size(dataFwd.tpsf,1); %count: number of histograms
