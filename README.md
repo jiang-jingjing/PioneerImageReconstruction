@@ -1,4 +1,6 @@
 # Pioneer image reconstruction 
+created by Jingjing Jiang jing.jing.jiang@outlook.com
+
 ## Introduction
 
 The  is a package based on MATLAB for the time-domain 
