@@ -1,5 +1,5 @@
 # Pioneer image reconstruction 
-created by Jingjing Jiang jing.jing.jiang@outlook.com
+Author: Jingjing Jiang jing.jing.jiang@outlook.com
 
 ## Introduction
 
