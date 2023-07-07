@@ -49,7 +49,9 @@ plot(mesh_1.meas.coord(1,1), mesh_1.meas.coord(1,2),'co','LineWidth',2,'MarkerSi
 %% add optical properties
 wavList = {'690', '830'};
  
-muas_bulk = [0.008 0.01];% Target values
+% muas_bulk = [0.008 0.01];% Target values
+% mus_r_bulk = [0.3 0.3]; % Target values
+muas_bulk = [0.008 0.01]*2;% Target values
 mus_r_bulk = [0.3 0.3]; % Target values
 %  mus_r_bulk - 0.54;
 muas_si = muas_bulk .*5;

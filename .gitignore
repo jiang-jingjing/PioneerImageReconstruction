@@ -2,3 +2,6 @@
 ./demo_nirfast_2d/mesh/untitled.m
 ./test_code/*node_modules
 filetoignore
+exampleVolumeFEM/Cylinder_D90/Cylinder_mesh.mat
+exampleVolumeFEM/
+

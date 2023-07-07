@@ -16,12 +16,11 @@ Prefix = 'laser';
 waveList = [725];
 
 sources =  [1:11];
-% sources = [1 5 8]
-proj_name = 'Spih10_z3_20211001'
-FOLDER = ['/media/jiang/WD10T/Data/Projects/NIROTreconstruction/PioneerMeasurement2021/Data/']
-flag_prj = ['/' proj_name];
+% proj_name = 'SPih10r20230503'
+FOLDER = ['/media/jiang/WD10T/Data/Projects/PioneerExperiment2023/Data/']
+flag_prj = ['20230616_TS_lq5_1'];
 fldr = [FOLDER flag_prj];
-file = [fldr '/laser-' proj_name '.hdf5'];
+file = [fldr '/laser-' flag_prj '.hdf5'];
 % flag_prj = '/lp_20210615_depth2incl/lq_dist_11_6/';
 % fldr = [FOLDER flag_prj];
 % file = [fldr '/laser-lq_dist_11_6.hdf5'];
