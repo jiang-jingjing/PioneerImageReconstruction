@@ -82,7 +82,7 @@ title('3D Volume Slices')
 hold on
 % Visualize detector placement (optional)
 scatter3(cfg.detpos(:,1), cfg.detpos(:,2), cfg.detpos(:,3), 40, 'filled');
-title('10x10 Detector Array (2 mm spacing)');
+title('Detector Array (2 mm spacing)');
 xlabel('X (voxels)'); ylabel('Y (voxels)'); zlabel('Z (voxels)');
 axis equal; grid on;
 % Add source position
