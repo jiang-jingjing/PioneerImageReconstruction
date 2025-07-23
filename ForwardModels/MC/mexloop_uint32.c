@@ -19,6 +19,7 @@
  * created by Jiang Jingjing 2025.07.22.
  *
  *=================================================================*/
+#include "stdint.h" //required for windows OS
 #include "mex.h"
 #include <string.h>  // for memset
 
