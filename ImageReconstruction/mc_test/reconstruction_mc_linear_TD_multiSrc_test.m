@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Image reconstruction based on Perturbat ion model
+% Image reconstruction based on Perturbation model
 % Forward model: MCXLAB time domain
 % Inverse problem solver: linear, lsqr from Matlab
 % Created by jingjing jiang, 
